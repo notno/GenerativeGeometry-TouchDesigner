@@ -6,7 +6,7 @@
 * file with another authorized licensee of Derivative's TouchDesigner software.
 * Otherwise, no redistribution or sharing of this file, with or without
 * modification, is permitted.
-*/
+*/ // @TODO: OK?
 
 #include "GenerativeGeometrySOP.h"
 
@@ -32,10 +32,10 @@ extern "C"
 		// The opType is the unique name for this TOP. It must start with a 
 		// capital A-Z character, and all the following characters must lower case
 		// or numbers (a-z, 0-9)
-		info->customOPInfo.opType->setString("GenerativeGeometry");
+		info->customOPInfo.opType->setString("GenerativeGeometrySOP");
 
 		// The opLabel is the text that will show up in the OP Create Dialog
-		info->customOPInfo.opLabel->setString("GenerativeGeometry SOP");
+		info->customOPInfo.opLabel->setString("GenerativeGeometrySOP");
 
 		// Will be turned into a 3 letter icon on the nodes
 		info->customOPInfo.opIcon->setString("GGS");
@@ -56,7 +56,7 @@ extern "C"
 	{
 		// Return a new instance of your class every time this is called.
 		// It will be called once per SOP that is using the .dll
-		return new GenerativeGeometry(info);
+		return new GenerativeGeometrySOP(info);
 	}
 
 	DLLEXPORT
@@ -66,13 +66,13 @@ extern "C"
 		// Delete the instance here, this will be called when
 		// Touch is shutting down, when the SOP using that instance is deleted, or
 		// if the SOP loads a different DLL
-		delete (GenerativeGeometry*)instance;
+		delete (GenerativeGeometrySOP*)instance;
 	}
 
 };
 
 
-GenerativeGeometry::GenerativeGeometry(const OP_NodeInfo* info) : myNodeInfo(info)
+GenerativeGeometrySOP::GenerativeGeometrySOP(const OP_NodeInfo* info) : myNodeInfo(info)
 {
 	myExecuteCount = 0;
 	myOffset = 0.0;
@@ -84,13 +84,13 @@ GenerativeGeometry::GenerativeGeometry(const OP_NodeInfo* info) : myNodeInfo(inf
 	myDat = "N/A";
 }
 
-GenerativeGeometry::~GenerativeGeometry()
+GenerativeGeometrySOP::~GenerativeGeometrySOP()
 {
 
 }
 
 void
-GenerativeGeometry::getGeneralInfo(SOP_GeneralInfo* ginfo, const OP_Inputs* inputs, void* reserved)
+GenerativeGeometrySOP::getGeneralInfo(SOP_GeneralInfo* ginfo, const OP_Inputs* inputs, void* reserved)
 {
 	// This will cause the node to cook every frame
 	ginfo->cookEveryFrameIfAsked = false;
@@ -107,7 +107,7 @@ GenerativeGeometry::getGeneralInfo(SOP_GeneralInfo* ginfo, const OP_Inputs* inpu
 //-----------------------------------------------------------------------------------------------------
 
 void
-GenerativeGeometry::cubeGeometry(SOP_Output* output, float scale)
+GenerativeGeometrySOP::cubeGeometry(SOP_Output* output, float scale)
 {
 	// to generate a geometry:
 	// addPoint() is the first function to be called.
@@ -214,7 +214,7 @@ GenerativeGeometry::cubeGeometry(SOP_Output* output, float scale)
 }
 
 void
-GenerativeGeometry::lineGeometry(SOP_Output* output)
+GenerativeGeometrySOP::lineGeometry(SOP_Output* output)
 {
 	// to generate a geometry:
 	// addPoint() is the first function to be called.
@@ -342,7 +342,7 @@ GenerativeGeometry::lineGeometry(SOP_Output* output)
 }
 
 void
-GenerativeGeometry::triangleGeometry(SOP_Output* output)
+GenerativeGeometrySOP::triangleGeometry(SOP_Output* output)
 {
 	int32_t vertices[3] = { 0, 1, 2 };
 
@@ -362,7 +362,7 @@ GenerativeGeometry::triangleGeometry(SOP_Output* output)
 }
 
 void
-GenerativeGeometry::execute(SOP_Output* output, const OP_Inputs* inputs, void* reserved)
+GenerativeGeometrySOP::execute(SOP_Output* output, const OP_Inputs* inputs, void* reserved)
 {
 	myExecuteCount++;
 
@@ -692,7 +692,7 @@ fillParticleVBO(SOP_VBOOutput* output,
 }
 
 void
-GenerativeGeometry::cubeGeometryVBO(SOP_VBOOutput* output, float scale)
+GenerativeGeometrySOP::cubeGeometryVBO(SOP_VBOOutput* output, float scale)
 {
 	Position pointArr[] =
 	{
@@ -875,7 +875,7 @@ GenerativeGeometry::cubeGeometryVBO(SOP_VBOOutput* output, float scale)
 }
 
 void
-GenerativeGeometry::lineGeometryVBO(SOP_VBOOutput* output)
+GenerativeGeometrySOP::lineGeometryVBO(SOP_VBOOutput* output)
 {
 	Position pointArr[] =
 	{
@@ -940,7 +940,7 @@ GenerativeGeometry::lineGeometryVBO(SOP_VBOOutput* output)
 }
 
 void
-GenerativeGeometry::triangleGeometryVBO(SOP_VBOOutput* output)
+GenerativeGeometrySOP::triangleGeometryVBO(SOP_VBOOutput* output)
 {
 	Vector normals[] =
 	{
@@ -972,7 +972,7 @@ GenerativeGeometry::triangleGeometryVBO(SOP_VBOOutput* output)
 }
 
 void
-GenerativeGeometry::particleGeometryVBO(SOP_VBOOutput* output)
+GenerativeGeometrySOP::particleGeometryVBO(SOP_VBOOutput* output)
 {
 	Position pointArr[] =
 	{
@@ -1123,7 +1123,7 @@ GenerativeGeometry::particleGeometryVBO(SOP_VBOOutput* output)
 
 
 void
-GenerativeGeometry::executeVBO(SOP_VBOOutput* output,
+GenerativeGeometrySOP::executeVBO(SOP_VBOOutput* output,
 						const OP_Inputs* inputs,
 						void* reserved)
 {
@@ -1229,7 +1229,7 @@ GenerativeGeometry::executeVBO(SOP_VBOOutput* output,
 //-----------------------------------------------------------------------------------------------------
 
 int32_t
-GenerativeGeometry::getNumInfoCHOPChans(void* reserved)
+GenerativeGeometrySOP::getNumInfoCHOPChans(void* reserved)
 {
 	// We return the number of channel we want to output to any Info CHOP
 	// connected to the CHOP. In this example we are just going to send 4 channels.
@@ -1237,7 +1237,7 @@ GenerativeGeometry::getNumInfoCHOPChans(void* reserved)
 }
 
 void
-GenerativeGeometry::getInfoCHOPChan(int32_t index,
+GenerativeGeometrySOP::getInfoCHOPChan(int32_t index,
 								OP_InfoCHOPChan* chan, void* reserved)
 {
 	// This function will be called once for each channel we said we'd want to return
@@ -1269,7 +1269,7 @@ GenerativeGeometry::getInfoCHOPChan(int32_t index,
 }
 
 bool
-GenerativeGeometry::getInfoDATSize(OP_InfoDATSize* infoSize, void* reserved)
+GenerativeGeometrySOP::getInfoDATSize(OP_InfoDATSize* infoSize, void* reserved)
 {
 	infoSize->rows = 3;
 	infoSize->cols = 2;
@@ -1280,7 +1280,7 @@ GenerativeGeometry::getInfoDATSize(OP_InfoDATSize* infoSize, void* reserved)
 }
 
 void
-GenerativeGeometry::getInfoDATEntries(int32_t index,
+GenerativeGeometrySOP::getInfoDATEntries(int32_t index,
 								int32_t nEntries,
 								OP_InfoDATEntries* entries,
 								void* reserved)
@@ -1348,7 +1348,7 @@ GenerativeGeometry::getInfoDATEntries(int32_t index,
 
 
 void
-GenerativeGeometry::setupParameters(OP_ParameterManager* manager, void* reserved)
+GenerativeGeometrySOP::setupParameters(OP_ParameterManager* manager, void* reserved)
 {
 	// CHOP
 	{
@@ -1416,7 +1416,7 @@ GenerativeGeometry::setupParameters(OP_ParameterManager* manager, void* reserved
 }
 
 void
-GenerativeGeometry::pulsePressed(const char* name, void* reserved)
+GenerativeGeometrySOP::pulsePressed(const char* name, void* reserved)
 {
 	if (!strcmp(name, "Reset"))
 	{

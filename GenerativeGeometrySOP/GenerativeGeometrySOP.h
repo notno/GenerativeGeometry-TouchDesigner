@@ -10,18 +10,19 @@
 */
 
 #include "SOP_CPlusPlusBase.h"
+#include "GG_Gear3D.h"
 #include <string>
 
 
 
 // To get more help about these functions, look at SOP_CPlusPlusBase.h
-class GenerativeGeometry : public SOP_CPlusPlusBase
+class GenerativeGeometrySOP : public SOP_CPlusPlusBase
 {
 public:
 
-	GenerativeGeometry(const OP_NodeInfo* info);
+	GenerativeGeometrySOP(const OP_NodeInfo* info);
 
-	virtual ~GenerativeGeometry();
+	virtual ~GenerativeGeometrySOP();
 
 	virtual void	getGeneralInfo(SOP_GeneralInfo*, const OP_Inputs*, void* reserved1) override;
 
