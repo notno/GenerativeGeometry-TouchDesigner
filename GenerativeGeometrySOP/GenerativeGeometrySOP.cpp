@@ -10,6 +10,8 @@
 
 #include "GenerativeGeometrySOP.h"
 #include "GG_Math.h"
+#include "GG_Geometry.h"
+#include "GG_Circle.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -364,9 +366,26 @@ GenerativeGeometrySOP::triangleGeometry(SOP_Output* output)
 }
 
 void
-GenerativeGeometrySOP::gearGeometry(SOP_Output* output) {
-	double v = GenerativeGeometry::Math::RandNormalized();
-	std::cout << "!!!!!!!!!!! " << v << std::endl;
+GenerativeGeometrySOP::circleGeometry(SOP_Output* output) {
+	auto circle = GenerativeGeometry::Circle(GenerativeGeometry::vec3(0), 100, 16);
+	circle.Generate();
+	auto verts = circle.GetVertices();
+
+	Vector normal(0.0f, 0.0f, 1.0f);
+
+	for (int i = 0; i < circle.GetNumVerts(); i++)
+	{
+		output->addPoint(Position(verts[i].X, verts[i].Y, verts[i].Z));
+		output->setNormal(normal, i);
+	}
+
+	auto triVertIndices = circle.GetTriangleVertexIndices();
+	for (int i = 0; i < circle.GetNumTriangleVertIndices(); i+=3) {
+		int32_t a = triVertIndices.at(i);
+		int32_t b = triVertIndices.at(i + 1);
+		int32_t c = triVertIndices.at(i + 2);
+		output->addTriangle(a,b,c);
+	}
 }
 
 void
