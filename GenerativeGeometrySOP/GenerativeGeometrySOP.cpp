@@ -6,10 +6,12 @@
 * file with another authorized licensee of Derivative's TouchDesigner software.
 * Otherwise, no redistribution or sharing of this file, with or without
 * modification, is permitted.
-*/ // @TODO: OK?
+*/
 
 #include "GenerativeGeometrySOP.h"
+#include "GG_Math.h"
 
+#include <iostream>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -35,10 +37,10 @@ extern "C"
 		info->customOPInfo.opType->setString("GenerativeGeometrySOP");
 
 		// The opLabel is the text that will show up in the OP Create Dialog
-		info->customOPInfo.opLabel->setString("GenerativeGeometrySOP");
+		info->customOPInfo.opLabel->setString("Generative Geometry");
 
 		// Will be turned into a 3 letter icon on the nodes
-		info->customOPInfo.opIcon->setString("GGS");
+		info->customOPInfo.opIcon->setString("GGG");
 
 		// Information about the author of this OP
 		info->customOPInfo.authorName->setString("Nathan Rosquist");
@@ -362,6 +364,12 @@ GenerativeGeometrySOP::triangleGeometry(SOP_Output* output)
 }
 
 void
+GenerativeGeometrySOP::gearGeometry(SOP_Output* output) {
+	double v = GenerativeGeometry::Math::RandNormalized();
+	std::cout << "!!!!!!!!!!! " << v << std::endl;
+}
+
+void
 GenerativeGeometrySOP::execute(SOP_Output* output, const OP_Inputs* inputs, void* reserved)
 {
 	myExecuteCount++;
@@ -508,6 +516,11 @@ GenerativeGeometrySOP::execute(SOP_Output* output, const OP_Inputs* inputs, void
 			case 2:		// line
 			{
 				lineGeometry(output);
+				break;
+			}
+			case 3:     // gear
+			{
+				gearGeometry(output);
 				break;
 			}
 			default:
@@ -1384,10 +1397,10 @@ GenerativeGeometrySOP::setupParameters(OP_ParameterManager* manager, void* reser
 
 		sp.defaultValue = "Cube";
 
-		const char *names[] = { "Cube", "Triangle", "Line" };
-		const char *labels[] = { "Cube", "Triangle", "Line" };
+		const char *names[] = { "Cube", "Triangle", "Line", "Gear" };
+		const char *labels[] = { "Cube", "Triangle", "Line", "Gear" };
 
-		OP_ParAppendResult res = manager->appendMenu(sp, 3, names, labels);
+		OP_ParAppendResult res = manager->appendMenu(sp, 4, names, labels);
 		assert(res == OP_ParAppendResult::Success);
 	}
 

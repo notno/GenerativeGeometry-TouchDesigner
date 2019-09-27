@@ -3,6 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenerativeGeometrySOP", "GenerativeGeometrySOP.vcxproj", "{3F5BEECD-FA36-459F-91B8-BB481A67EF44}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D97CCCD8-DFEC-4575-8CB4-5E4EAF1F9A29} = {D97CCCD8-DFEC-4575-8CB4-5E4EAF1F9A29}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenerativeGeometry", "..\..\..\..\..\source\repos\GenerativeGeometry\GenerativeGeometry\GenerativeGeometry.vcxproj", "{D97CCCD8-DFEC-4575-8CB4-5E4EAF1F9A29}"
 EndProject
@@ -33,6 +36,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {98C57905-542E-4417-AAC9-AFFAB538B43F}
+		SolutionGuid = {3B5F254A-89FC-40E3-9884-847752656FD8}
 	EndGlobalSection
 EndGlobal

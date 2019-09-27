@@ -10,7 +10,6 @@
 */
 
 #include "SOP_CPlusPlusBase.h"
-#include "GG_Gear3D.h"
 #include <string>
 
 
@@ -56,6 +55,8 @@ private:
 	void lineGeometry(SOP_Output* output);
 
 	void triangleGeometry(SOP_Output* output);
+
+	void gearGeometry(SOP_Output* output); // GenerativeGeometry gear
 
 	void cubeGeometryVBO(SOP_VBOOutput* output, float scale = 1.0f);
 
