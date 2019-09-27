@@ -21,11 +21,11 @@ mono_crash.*
 # Build results - ONLY inlucde .dll for TouchDesigner
 # [Dd]ebug/
 [Dd]ebug/Generati.*
-[Dd]ebug/GenerativeGeometry.exp
-[Dd]ebug/GenerativeGeometry.lib
-[Dd]ebug/GenerativeGeometry.log
-[Dd]ebug/GenerativeGeometry.obj
-[Dd]ebug/GenerativeGeometry.pdb
+[Dd]ebug/GenerativeGeometrySOP.exp
+[Dd]ebug/GenerativeGeometrySOP.lib
+[Dd]ebug/GenerativeGeometrySOP.log
+[Dd]ebug/GenerativeGeometrySOP.obj
+[Dd]ebug/GenerativeGeometrySOP.pdb
 [Dd]ebug/vc*
 
 [Dd]ebugPublic/
