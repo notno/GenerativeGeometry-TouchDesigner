@@ -366,6 +366,12 @@ GenerativeGeometrySOP::triangleGeometry(SOP_Output* output)
 }
 
 void
+GenerativeGeometrySOP::gearGeometry(SOP_Output* output) {
+	std::cout << "foo" << std::endl;
+}
+
+
+void
 GenerativeGeometrySOP::circleGeometry(SOP_Output* output) {
 	auto circle = GenerativeGeometry::Circle(GenerativeGeometry::vec3(0), 100, 16);
 	circle.Generate();

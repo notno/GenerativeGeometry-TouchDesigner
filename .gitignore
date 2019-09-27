@@ -18,8 +18,16 @@ GenerativeGeometry.*.toe
 # Mono auto generated files
 mono_crash.*
 
-# Build results
-[Dd]ebug/
+# Build results - ONLY inlucde .dll for TouchDesigner
+# [Dd]ebug/
+[Dd]ebug/Generati.*
+[Dd]ebug/GenerativeGeometry.exp
+[Dd]ebug/GenerativeGeometry.lib
+[Dd]ebug/GenerativeGeometry.log
+[Dd]ebug/GenerativeGeometry.obj
+[Dd]ebug/GenerativeGeometry.pdb
+[Dd]ebug/vc*
+
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
