@@ -8,7 +8,7 @@
 * modification, is permitted.
 */
 
-#include "SimpleShapes.h"
+#include "GenerativeGeometrySOP.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -32,17 +32,17 @@ extern "C"
 		// The opType is the unique name for this TOP. It must start with a 
 		// capital A-Z character, and all the following characters must lower case
 		// or numbers (a-z, 0-9)
-		info->customOPInfo.opType->setString("Simpleshapes");
+		info->customOPInfo.opType->setString("GenerativeGeometry");
 
 		// The opLabel is the text that will show up in the OP Create Dialog
-		info->customOPInfo.opLabel->setString("Simple Shapes");
+		info->customOPInfo.opLabel->setString("GenerativeGeometry SOP");
 
 		// Will be turned into a 3 letter icon on the nodes
-		info->customOPInfo.opIcon->setString("SSP");
+		info->customOPInfo.opIcon->setString("GGS");
 
 		// Information about the author of this OP
-		info->customOPInfo.authorName->setString("Author Name");
-		info->customOPInfo.authorEmail->setString("email@email.com");
+		info->customOPInfo.authorName->setString("Nathan Rosquist");
+		info->customOPInfo.authorEmail->setString("nrosquist@gmail.com");
 
 		// This SOP works with 0 or 1 inputs
 		info->customOPInfo.minInputs = 0;
@@ -56,7 +56,7 @@ extern "C"
 	{
 		// Return a new instance of your class every time this is called.
 		// It will be called once per SOP that is using the .dll
-		return new SimpleShapes(info);
+		return new GenerativeGeometry(info);
 	}
 
 	DLLEXPORT
@@ -66,13 +66,13 @@ extern "C"
 		// Delete the instance here, this will be called when
 		// Touch is shutting down, when the SOP using that instance is deleted, or
 		// if the SOP loads a different DLL
-		delete (SimpleShapes*)instance;
+		delete (GenerativeGeometry*)instance;
 	}
 
 };
 
 
-SimpleShapes::SimpleShapes(const OP_NodeInfo* info) : myNodeInfo(info)
+GenerativeGeometry::GenerativeGeometry(const OP_NodeInfo* info) : myNodeInfo(info)
 {
 	myExecuteCount = 0;
 	myOffset = 0.0;
@@ -84,13 +84,13 @@ SimpleShapes::SimpleShapes(const OP_NodeInfo* info) : myNodeInfo(info)
 	myDat = "N/A";
 }
 
-SimpleShapes::~SimpleShapes()
+GenerativeGeometry::~GenerativeGeometry()
 {
 
 }
 
 void
-SimpleShapes::getGeneralInfo(SOP_GeneralInfo* ginfo, const OP_Inputs* inputs, void* reserved)
+GenerativeGeometry::getGeneralInfo(SOP_GeneralInfo* ginfo, const OP_Inputs* inputs, void* reserved)
 {
 	// This will cause the node to cook every frame
 	ginfo->cookEveryFrameIfAsked = false;
@@ -107,7 +107,7 @@ SimpleShapes::getGeneralInfo(SOP_GeneralInfo* ginfo, const OP_Inputs* inputs, vo
 //-----------------------------------------------------------------------------------------------------
 
 void
-SimpleShapes::cubeGeometry(SOP_Output* output, float scale)
+GenerativeGeometry::cubeGeometry(SOP_Output* output, float scale)
 {
 	// to generate a geometry:
 	// addPoint() is the first function to be called.
@@ -214,7 +214,7 @@ SimpleShapes::cubeGeometry(SOP_Output* output, float scale)
 }
 
 void
-SimpleShapes::lineGeometry(SOP_Output* output)
+GenerativeGeometry::lineGeometry(SOP_Output* output)
 {
 	// to generate a geometry:
 	// addPoint() is the first function to be called.
@@ -342,7 +342,7 @@ SimpleShapes::lineGeometry(SOP_Output* output)
 }
 
 void
-SimpleShapes::triangleGeometry(SOP_Output* output)
+GenerativeGeometry::triangleGeometry(SOP_Output* output)
 {
 	int32_t vertices[3] = { 0, 1, 2 };
 
@@ -362,7 +362,7 @@ SimpleShapes::triangleGeometry(SOP_Output* output)
 }
 
 void
-SimpleShapes::execute(SOP_Output* output, const OP_Inputs* inputs, void* reserved)
+GenerativeGeometry::execute(SOP_Output* output, const OP_Inputs* inputs, void* reserved)
 {
 	myExecuteCount++;
 
@@ -692,7 +692,7 @@ fillParticleVBO(SOP_VBOOutput* output,
 }
 
 void
-SimpleShapes::cubeGeometryVBO(SOP_VBOOutput* output, float scale)
+GenerativeGeometry::cubeGeometryVBO(SOP_VBOOutput* output, float scale)
 {
 	Position pointArr[] =
 	{
@@ -875,7 +875,7 @@ SimpleShapes::cubeGeometryVBO(SOP_VBOOutput* output, float scale)
 }
 
 void
-SimpleShapes::lineGeometryVBO(SOP_VBOOutput* output)
+GenerativeGeometry::lineGeometryVBO(SOP_VBOOutput* output)
 {
 	Position pointArr[] =
 	{
@@ -940,7 +940,7 @@ SimpleShapes::lineGeometryVBO(SOP_VBOOutput* output)
 }
 
 void
-SimpleShapes::triangleGeometryVBO(SOP_VBOOutput* output)
+GenerativeGeometry::triangleGeometryVBO(SOP_VBOOutput* output)
 {
 	Vector normals[] =
 	{
@@ -972,7 +972,7 @@ SimpleShapes::triangleGeometryVBO(SOP_VBOOutput* output)
 }
 
 void
-SimpleShapes::particleGeometryVBO(SOP_VBOOutput* output)
+GenerativeGeometry::particleGeometryVBO(SOP_VBOOutput* output)
 {
 	Position pointArr[] =
 	{
@@ -1123,7 +1123,7 @@ SimpleShapes::particleGeometryVBO(SOP_VBOOutput* output)
 
 
 void
-SimpleShapes::executeVBO(SOP_VBOOutput* output,
+GenerativeGeometry::executeVBO(SOP_VBOOutput* output,
 						const OP_Inputs* inputs,
 						void* reserved)
 {
@@ -1229,7 +1229,7 @@ SimpleShapes::executeVBO(SOP_VBOOutput* output,
 //-----------------------------------------------------------------------------------------------------
 
 int32_t
-SimpleShapes::getNumInfoCHOPChans(void* reserved)
+GenerativeGeometry::getNumInfoCHOPChans(void* reserved)
 {
 	// We return the number of channel we want to output to any Info CHOP
 	// connected to the CHOP. In this example we are just going to send 4 channels.
@@ -1237,7 +1237,7 @@ SimpleShapes::getNumInfoCHOPChans(void* reserved)
 }
 
 void
-SimpleShapes::getInfoCHOPChan(int32_t index,
+GenerativeGeometry::getInfoCHOPChan(int32_t index,
 								OP_InfoCHOPChan* chan, void* reserved)
 {
 	// This function will be called once for each channel we said we'd want to return
@@ -1269,7 +1269,7 @@ SimpleShapes::getInfoCHOPChan(int32_t index,
 }
 
 bool
-SimpleShapes::getInfoDATSize(OP_InfoDATSize* infoSize, void* reserved)
+GenerativeGeometry::getInfoDATSize(OP_InfoDATSize* infoSize, void* reserved)
 {
 	infoSize->rows = 3;
 	infoSize->cols = 2;
@@ -1280,7 +1280,7 @@ SimpleShapes::getInfoDATSize(OP_InfoDATSize* infoSize, void* reserved)
 }
 
 void
-SimpleShapes::getInfoDATEntries(int32_t index,
+GenerativeGeometry::getInfoDATEntries(int32_t index,
 								int32_t nEntries,
 								OP_InfoDATEntries* entries,
 								void* reserved)
@@ -1348,7 +1348,7 @@ SimpleShapes::getInfoDATEntries(int32_t index,
 
 
 void
-SimpleShapes::setupParameters(OP_ParameterManager* manager, void* reserved)
+GenerativeGeometry::setupParameters(OP_ParameterManager* manager, void* reserved)
 {
 	// CHOP
 	{
@@ -1416,7 +1416,7 @@ SimpleShapes::setupParameters(OP_ParameterManager* manager, void* reserved)
 }
 
 void
-SimpleShapes::pulsePressed(const char* name, void* reserved)
+GenerativeGeometry::pulsePressed(const char* name, void* reserved)
 {
 	if (!strcmp(name, "Reset"))
 	{

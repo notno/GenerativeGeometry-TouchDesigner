@@ -15,13 +15,13 @@
 
 
 // To get more help about these functions, look at SOP_CPlusPlusBase.h
-class SimpleShapes : public SOP_CPlusPlusBase
+class GenerativeGeometry : public SOP_CPlusPlusBase
 {
 public:
 
-	SimpleShapes(const OP_NodeInfo* info);
+	GenerativeGeometry(const OP_NodeInfo* info);
 
-	virtual ~SimpleShapes();
+	virtual ~GenerativeGeometry();
 
 	virtual void	getGeneralInfo(SOP_GeneralInfo*, const OP_Inputs*, void* reserved1) override;
 
