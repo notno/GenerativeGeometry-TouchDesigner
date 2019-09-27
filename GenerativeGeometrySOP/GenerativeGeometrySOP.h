@@ -56,7 +56,9 @@ private:
 
 	void triangleGeometry(SOP_Output* output);
 
-	void circleGeometry(SOP_Output* output); // GenerativeGeometry circle
+	void circleGeometry(SOP_Output* output); // GenerativeGeometry
+	void gear2DGeometry(SOP_Output* output); // GenerativeGeometry
+	void gear3DGeometry(SOP_Output* output); // GenerativeGeometry
 
 	void cubeGeometryVBO(SOP_VBOOutput* output, float scale = 1.0f);
 

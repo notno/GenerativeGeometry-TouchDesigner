@@ -12,6 +12,9 @@
 #include "GG_Math.h"
 #include "GG_Geometry.h"
 #include "GG_Circle.h"
+#include "GG_Gear.h"
+#include "GG_Gear2D.h"
+#include "GG_Gear3D.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -366,19 +369,12 @@ GenerativeGeometrySOP::triangleGeometry(SOP_Output* output)
 }
 
 void
-GenerativeGeometrySOP::gearGeometry(SOP_Output* output) {
-	std::cout << "foo" << std::endl;
-}
-
-
-void
 GenerativeGeometrySOP::circleGeometry(SOP_Output* output) {
-	auto circle = GenerativeGeometry::Circle(GenerativeGeometry::vec3(0), 100, 16);
+	auto circle = GenerativeGeometry::Circle(GenerativeGeometry::vec3(0), 1000, 16);
 	circle.Generate();
+
 	auto verts = circle.GetVertices();
-
 	Vector normal(0.0f, 0.0f, 1.0f);
-
 	for (int i = 0; i < circle.GetNumVerts(); i++)
 	{
 		output->addPoint(Position(verts[i].X, verts[i].Y, verts[i].Z));
@@ -393,6 +389,52 @@ GenerativeGeometrySOP::circleGeometry(SOP_Output* output) {
 		output->addTriangle(a,b,c);
 	}
 }
+
+void
+GenerativeGeometrySOP::gear2DGeometry(SOP_Output* output) {
+	auto gear2D = GenerativeGeometry::Gear2D(GenerativeGeometry::vec3(0), 1000, 16);
+	gear2D.Generate();
+
+	auto verts = gear2D.GetVertices();
+	Vector normal(0.0f, 0.0f, 1.0f);
+	for (int i = 0; i < gear2D.GetNumVerts(); i++)
+	{
+		output->addPoint(Position(verts[i].X, verts[i].Y, verts[i].Z));
+		output->setNormal(normal, i);
+	}
+
+	auto triVertIndices = gear2D.GetTriangleVertexIndices();
+	for (int i = 0; i < gear2D.GetNumTriangleVertIndices(); i += 3) {
+		int32_t a = triVertIndices.at(i);
+		int32_t b = triVertIndices.at(i + 1);
+		int32_t c = triVertIndices.at(i + 2);
+		output->addTriangle(a, b, c);
+	}
+}
+
+
+void
+GenerativeGeometrySOP::gear3DGeometry(SOP_Output* output) {
+	auto gear3D = GenerativeGeometry::Gear3D(GenerativeGeometry::vec3(0), 10, 32, nullptr, 50);
+	gear3D.Generate();
+
+	auto verts = gear3D.GetVertices();
+	Vector normal(1.0f, 0.0f, 0.0f);
+	for (int i = 0; i < gear3D.GetNumVerts(); i++)
+	{
+		output->addPoint(Position(verts[i].X, verts[i].Y, verts[i].Z));
+		output->setNormal(normal, i);
+	}
+
+	auto triVertIndices = gear3D.GetTriangleVertexIndices();
+	for (int i = 0; i < gear3D.GetNumTriangleVertIndices(); i += 3) {
+		int32_t a = triVertIndices.at(i);
+		int32_t b = triVertIndices.at(i + 1);
+		int32_t c = triVertIndices.at(i + 2);
+		output->addTriangle(a, b, c);
+	}
+}
+
 
 void
 GenerativeGeometrySOP::execute(SOP_Output* output, const OP_Inputs* inputs, void* reserved)
@@ -545,7 +587,17 @@ GenerativeGeometrySOP::execute(SOP_Output* output, const OP_Inputs* inputs, void
 			}
 			case 3:     // gear
 			{
-				gearGeometry(output);
+				circleGeometry(output);
+				break;
+			}
+			case 4:
+			{
+				gear2DGeometry(output);
+				break;
+			}
+			case 5:
+			{
+				gear3DGeometry(output);
 				break;
 			}
 			default:
@@ -1422,10 +1474,10 @@ GenerativeGeometrySOP::setupParameters(OP_ParameterManager* manager, void* reser
 
 		sp.defaultValue = "Cube";
 
-		const char *names[] = { "Cube", "Triangle", "Line", "Gear" };
-		const char *labels[] = { "Cube", "Triangle", "Line", "Gear" };
+		const char *names[] = {  "Cube", "Triangle", "Line", "Circle", "Gear", "Geer" };
+		const char *labels[] = { "Cube", "Triangle", "Line", "Circle", "Gear", "Geer" };
 
-		OP_ParAppendResult res = manager->appendMenu(sp, 4, names, labels);
+		OP_ParAppendResult res = manager->appendMenu(sp, 6, names, labels);
 		assert(res == OP_ParAppendResult::Success);
 	}
 
