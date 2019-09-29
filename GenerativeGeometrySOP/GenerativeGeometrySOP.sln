@@ -9,6 +9,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenerativeGeometrySOP", "Ge
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenerativeGeometry", "..\..\..\..\..\source\repos\GenerativeGeometry\GenerativeGeometry\GenerativeGeometry.vcxproj", "{D97CCCD8-DFEC-4575-8CB4-5E4EAF1F9A29}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "..\..\..\..\..\source\repos\GenerativeGeometry\Test\Test.vcxproj", "{BBCADA05-7521-4B11-BC3C-F2444E586CAA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3F5BEECD-FA36-459F-91B8-BB481A67EF44} = {3F5BEECD-FA36-459F-91B8-BB481A67EF44}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +36,14 @@ Global
 		{D97CCCD8-DFEC-4575-8CB4-5E4EAF1F9A29}.Release|x64.Build.0 = Release|x64
 		{D97CCCD8-DFEC-4575-8CB4-5E4EAF1F9A29}.Release|x86.ActiveCfg = Release|Win32
 		{D97CCCD8-DFEC-4575-8CB4-5E4EAF1F9A29}.Release|x86.Build.0 = Release|Win32
+		{BBCADA05-7521-4B11-BC3C-F2444E586CAA}.Debug|x64.ActiveCfg = Debug|x64
+		{BBCADA05-7521-4B11-BC3C-F2444E586CAA}.Debug|x64.Build.0 = Debug|x64
+		{BBCADA05-7521-4B11-BC3C-F2444E586CAA}.Debug|x86.ActiveCfg = Debug|Win32
+		{BBCADA05-7521-4B11-BC3C-F2444E586CAA}.Debug|x86.Build.0 = Debug|Win32
+		{BBCADA05-7521-4B11-BC3C-F2444E586CAA}.Release|x64.ActiveCfg = Release|x64
+		{BBCADA05-7521-4B11-BC3C-F2444E586CAA}.Release|x64.Build.0 = Release|x64
+		{BBCADA05-7521-4B11-BC3C-F2444E586CAA}.Release|x86.ActiveCfg = Release|Win32
+		{BBCADA05-7521-4B11-BC3C-F2444E586CAA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

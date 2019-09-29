@@ -415,7 +415,7 @@ GenerativeGeometrySOP::gear2DGeometry(SOP_Output* output) {
 
 void
 GenerativeGeometrySOP::gear3DGeometry(SOP_Output* output) {
-	auto gear3D = GenerativeGeometry::Gear3D(GenerativeGeometry::vec3(0), 10, 32, nullptr, 50);
+	auto gear3D = GenerativeGeometry::Gear3D(GenerativeGeometry::vec3(0), 10, 32, 50);
 	gear3D.Generate();
 
 	auto verts = gear3D.GetVertices();
